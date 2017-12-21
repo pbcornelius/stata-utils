@@ -1,5 +1,7 @@
 package de.pbc.stata;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -66,6 +68,17 @@ public class StataUtils {
 	
 	public static List<String> getMacroList(String name) {
 		return Arrays.asList(getMacroArray(name));
+	}
+	
+	public static String correctRounding(Double val, int scale) {
+		BigDecimal valBD = BigDecimal.valueOf(val);
+		BigDecimal valBDRounded = valBD.setScale(scale, RoundingMode.HALF_UP);
+		
+		if (valBD.signum() == -1 && valBDRounded.signum() != -1) {
+			return "-" + valBDRounded;
+		} else {
+			return valBDRounded.toString();
+		}
 	}
 	
 }
