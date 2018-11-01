@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import com.stata.sfi.Data;
 import com.stata.sfi.Macro;
 import com.stata.sfi.Matrix;
 
@@ -78,6 +79,50 @@ public class StataUtils {
 			return "-" + valBDRounded;
 		} else {
 			return valBDRounded.toString();
+		}
+	}
+	
+	public static double getDouble(int var, long obs) {
+		double val = Data.getNum(var, obs);
+		if (Data.isValueMissing(val)) {
+			throw new RuntimeException(String.format("value at [%d, %d] is missing", var, obs));
+		} else {
+			return val;
+		}
+	}
+	
+	public static long getLong(int var, long obs) {
+		return (long) getDouble(var, obs);
+	}
+	
+	public static int getInt(int var, long obs) {
+		return (int) getDouble(var, obs);
+	}
+	
+	public static Double getDoubleObj(int var, long obs) {
+		double val = Data.getNum(var, obs);
+		if (Data.isValueMissing(val)) {
+			return null;
+		} else {
+			return val;
+		}
+	}
+	
+	public static Long getLongObj(int var, long obs) {
+		double val = Data.getNum(var, obs);
+		if (Data.isValueMissing(val)) {
+			return null;
+		} else {
+			return (long) val;
+		}
+	}
+	
+	public static Integer getIntObj(int var, long obs) {
+		double val = Data.getNum(var, obs);
+		if (Data.isValueMissing(val)) {
+			return null;
+		} else {
+			return (int) val;
 		}
 	}
 	
