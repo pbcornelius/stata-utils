@@ -156,7 +156,7 @@ public class PanelEventStudy {
 			
 			int timeId = StataUtils.getInt(timeVarIndex, i);
 			Integer rowState = StataUtils.getIntObj(stateVarIndex, i);
-			Integer event = StataUtils.getIntObj(eventVarIndex, i);
+			Integer event = StataUtils.getIntObj(eventVarIndex, i); // TODO: shouldn't the state be lagged?
 			
 			// continue if state or event are missing values
 			if (rowState == null || event == null) {
